@@ -1,53 +1,37 @@
-import Heading from "../components/Heading";
-import Paragraph from "../components/Paragraph";
+"use client";
 
-const Home = () => {
+import { useEffect, useState } from "react";
+
+const HomePage = () => {
+  const [artists, setArtists] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    try {
+      fetch("/api/artists")
+        .then((res) => res.json())
+        .then((data) => {
+          setArtists(data.artists);
+          setIsLoading(false);
+        });
+    } catch (error) {
+      setError(error);
+    }
+  }, []);
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error loading artists</p>;
+
+  console.log({ artists });
+
   return (
-    <main>
-      <Heading level={1} marginLeft={6}>
-        Spotify
-      </Heading>
-      <Heading level={2} marginBottom={4}>
-        Artists
-      </Heading>
-      <Heading level={3}>Songs</Heading>
-      <Paragraph intro marginBottom={12}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-      </Paragraph>
-      <Paragraph marginBottom={2}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-      </Paragraph>
-      <Paragraph marginBottom={5}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-      </Paragraph>
-      <Paragraph caption>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-      </Paragraph>
-    </main>
+    <div>
+      {artists.map((artist) => {
+        return <h1 key={artist.id}>{artist.name}</h1>;
+      })}
+    </div>
   );
 };
-export default Home;
+
+export default HomePage;
