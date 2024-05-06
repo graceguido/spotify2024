@@ -1,0 +1,15 @@
+@use "../../sass/abstracts/mixins";
+
+.paragraph {
+  font-size: 1rem;
+  font-family: Arial;
+  &.intro {
+    font-size: 1.5rem;
+    font-family: Georgia;
+  }
+  &.caption {
+    font-size: 0.75rem;
+    color: gray;
+  }
+  @include mixins.generateMargins();
+}

@@ -1,0 +1,11 @@
+@mixin generateMargins() {
+  $sides: top, right, bottom, left;
+
+  @each $side in $sides {
+    @for $i from 1 through 12 {
+      &.margin-#{$side}--#{$i} {
+        margin-#{$side}: #{$i}rem;
+      }
+    }
+  }
+}
