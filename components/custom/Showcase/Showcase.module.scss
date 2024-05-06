@@ -1,0 +1,23 @@
+.showcase {
+  background-color: pink;
+  height: calc(100vh - 5rem);
+  position: relative;
+  &__images {
+    aspect-ratio: 16/9;
+    width: 500px;
+    background-color: red;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    z-index: 1;
+    transform: translateX(-50%);
+  }
+  &__content {
+    position: relative;
+    z-index: 2;
+    background-color: tan;
+  }
+  &__number {
+    font-size: 100px;
+  }
+}
