@@ -2,7 +2,7 @@
 @use "../../../sass/abstracts/mixins";
 
 .showcase {
-  background-color: pink;
+  //   background-color: pink;
   height: calc(100vh - 5rem);
   //   position: relative;
   &__images {
@@ -30,7 +30,7 @@
     @include mixins.breakpoint(laptop) {
       width: 60vw;
       position: absolute;
-      top: 5rem;
+      top: 7rem;
       left: 50%;
       z-index: 1;
       transform: translateX(-50%);
@@ -72,5 +72,10 @@
     @include mixins.breakpoint(laptop) {
       font-size: 6rem;
     }
+  }
+  &__latest {
+    background-color: black;
+    padding: 1rem;
+    border: 1px solid white;
   }
 }
