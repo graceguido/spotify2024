@@ -5,8 +5,14 @@ import Heading from "@/components/html/Heading";
 import Row from "../../layout/Row";
 import { motion } from "framer-motion";
 import ButtonUI from "../../html/ButtonUI";
+import Image from "next/image";
 
-const ShowcaseContent = ({ activeIndex, items, setActiveIndex }) => {
+const ShowcaseContent = ({
+  activeIndex,
+  items,
+  setActiveIndex,
+  latestRelease,
+}) => {
   const headlineVariants = {
     initial: { opacity: 0, x: -100 },
     animate: { opacity: 1, x: 0 },
@@ -74,11 +80,28 @@ const ShowcaseContent = ({ activeIndex, items, setActiveIndex }) => {
                 />
               </Row>
             </Col>
-            <Col md={5}>
-              <div className={styles.showcase__latest}>
-                <Heading level={3}>Latest releases </Heading>
-              </div>
-            </Col>
+            {latestRelease && (
+              <Col md={5}>
+                <div className={styles.showcase__latest}>
+                  <Row>
+                    <Col>
+                      <Image
+                        src={latestRelease.images[0].url}
+                        alt={latestRelease.name}
+                        width={latestRelease.images[0].width}
+                        height={latestRelease.images[0].height}
+                        className={styles.album__cover}
+                      />
+                    </Col>
+                    <Col>
+                      <Heading level={3}>Latest Release</Heading>
+                      <p>{latestRelease.name}</p>
+                      <p>{latestRelease.release_date}</p>
+                    </Col>
+                  </Row>
+                </div>
+              </Col>
+            )}
             <Col md={6} textAlign="right">
               <ButtonUI label="View artist page" icon="faArrowRight" />
             </Col>
