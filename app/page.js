@@ -29,7 +29,7 @@ const HomePage = () => {
 
   return (
     <main>
-      <Showcase />
+      <Showcase items={artists} />
     </main>
   );
 };
