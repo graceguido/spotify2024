@@ -24,91 +24,87 @@ const ShowcaseContent = ({
     exit: { opacity: 0, y: 100 },
   };
   return (
-    <p>
-      <div className={styles.showcase__content}>
-        <Container>
-          <Row alignItems="flex-end" paddingBottom={2}>
-            <Col md={1}>
-              <span className={styles.showcase__counter}>
-                {activeIndex + 1}/{items.length}
-              </span>
+    <div className={styles.showcase__content}>
+      <Container>
+        <Row alignItems="flex-end" paddingBottom={2}>
+          <Col md={1}>
+            <span className={styles.showcase__counter}>
+              {activeIndex + 1}/{items.length}
+            </span>
+          </Col>
+          <Col xs={3} md={5}>
+            <motion.dv
+              variants={numberVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              key={`number-${activeIndex}`}
+            >
+              <span className={styles.showcase__number}>{activeIndex + 1}</span>
+            </motion.dv>
+          </Col>
+          <Col xs={9} md={6}>
+            <motion.h2
+              className={styles.showcase__artist}
+              key={items[activeIndex].name}
+              variants={headlineVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+            >
+              {items[activeIndex].name}
+            </motion.h2>
+          </Col>
+        </Row>
+        <Row paddingTop={2} paddingBottom={2} borderTop={1}>
+          <Col md={1}>
+            <Row justifyContent="space-between">
+              <ButtonUI
+                icon="faAngleLeft"
+                clickHandler={() => {
+                  setActiveIndex(activeIndex <= 0 ? 0 : activeIndex - 1);
+                }}
+              />
+              <ButtonUI
+                icon="faAngleRight"
+                clickHandler={() => {
+                  setActiveIndex(
+                    activeIndex >= items.length - 1
+                      ? items.length - 1
+                      : activeIndex + 1
+                  );
+                }}
+              />
+            </Row>
+          </Col>
+          {latestRelease && (
+            <Col md={5}>
+              <div className={styles.showcase__latest}>
+                <Row>
+                  <Col>
+                    <Image
+                      src={latestRelease.images[0].url}
+                      alt={latestRelease.name}
+                      width={latestRelease.images[0].width}
+                      height={latestRelease.images[0].height}
+                      className={styles.album__cover}
+                    />
+                  </Col>
+                  <Col>
+                    <Heading level={3}>Latest Release</Heading>
+                    <p>{latestRelease.name}</p>
+                    <p>{latestRelease.release_date}</p>
+                  </Col>
+                </Row>
+              </div>
             </Col>
-            <Col xs={3} md={5}>
-              <motion.dv
-                variants={numberVariants}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-                key={`number-${activeIndex}`}
-              >
-                <span className={styles.showcase__number}>
-                  {activeIndex + 1}
-                </span>
-              </motion.dv>
-            </Col>
-            <Col xs={9} md={6}>
-              <motion.h2
-                className={styles.showcase__artist}
-                key={items[activeIndex].name}
-                variants={headlineVariants}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-              >
-                {items[activeIndex].name}
-              </motion.h2>
-            </Col>
-          </Row>
-          <Row paddingTop={2} paddingBottom={2} borderTop={1}>
-            <Col md={1}>
-              <Row justifyContent="space-between">
-                <ButtonUI
-                  icon="faAngleLeft"
-                  clickHandler={() => {
-                    setActiveIndex(activeIndex <= 0 ? 0 : activeIndex - 1);
-                  }}
-                />
-                <ButtonUI
-                  icon="faAngleRight"
-                  clickHandler={() => {
-                    setActiveIndex(
-                      activeIndex >= items.length - 1
-                        ? items.length - 1
-                        : activeIndex + 1
-                    );
-                  }}
-                />
-              </Row>
-            </Col>
-            {latestRelease && (
-              <Col md={5}>
-                <div className={styles.showcase__latest}>
-                  <Row>
-                    <Col>
-                      <Image
-                        src={latestRelease.images[0].url}
-                        alt={latestRelease.name}
-                        width={latestRelease.images[0].width}
-                        height={latestRelease.images[0].height}
-                        className={styles.album__cover}
-                      />
-                    </Col>
-                    <Col>
-                      <Heading level={3}>Latest Release</Heading>
-                      <p>{latestRelease.name}</p>
-                      <p>{latestRelease.release_date}</p>
-                    </Col>
-                  </Row>
-                </div>
-              </Col>
-            )}
-            <Col md={6} textAlign="right">
-              <ButtonUI label="View artist page" icon="faArrowRight" />
-            </Col>
-          </Row>
-        </Container>
-      </div>
-    </p>
+          )}
+          <Col md={6} textAlign="right">
+            <ButtonUI label="View artist page" icon="faArrowRight" />
+          </Col>
+        </Row>
+      </Container>
+    </div>
   );
 };
 export default ShowcaseContent;

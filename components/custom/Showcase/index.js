@@ -30,8 +30,9 @@ const Showcase = ({ items }) => {
   return (
     <div className={styles.showcase}>
       <AnimatePresence>
-        <ShowcaseImages items={items} activeIndex={activeIndex} />
+        <ShowcaseImages key="top" items={items} activeIndex={activeIndex} />
         <ShowcaseContent
+          key="bottom"
           items={items}
           activeIndex={activeIndex}
           setActiveIndex={setActiveIndex}
