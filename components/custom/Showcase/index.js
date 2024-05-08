@@ -36,7 +36,7 @@ const Showcase = ({ items }) => {
           items={items}
           activeIndex={activeIndex}
           setActiveIndex={setActiveIndex}
-          latestRelease={albums.length > 0 ? albums[0] : null}
+          latestRelease={albums?.length > 0 ? albums[0] : null}
         />
       </AnimatePresence>
     </div>

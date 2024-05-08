@@ -33,7 +33,7 @@ const ShowcaseContent = ({
             </span>
           </Col>
           <Col xs={3} md={5}>
-            <motion.dv
+            <motion.div
               variants={numberVariants}
               initial="initial"
               animate="animate"
@@ -41,7 +41,7 @@ const ShowcaseContent = ({
               key={`number-${activeIndex}`}
             >
               <span className={styles.showcase__number}>{activeIndex + 1}</span>
-            </motion.dv>
+            </motion.div>
           </Col>
           <Col xs={9} md={6}>
             <motion.h2
