@@ -23,7 +23,7 @@ const Showcase = ({ items }) => {
         console.log(error);
       }
     }
-  }, [activeIndex]);
+  }, [items, activeIndex]);
 
   console.log({ albums });
 
