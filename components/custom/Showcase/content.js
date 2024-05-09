@@ -10,9 +10,16 @@ import Image from "next/image";
 const ShowcaseContent = ({
   activeIndex,
   items,
+  isExpanded,
   setActiveIndex,
   latestRelease,
+  setIsExpanded,
 }) => {
+  const sectionVariants = {
+    initial: { opacity: 0, y: 100 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: 100 },
+  };
   const headlineVariants = {
     initial: { opacity: 0, x: -100 },
     animate: { opacity: 1, x: 0 },
@@ -24,7 +31,13 @@ const ShowcaseContent = ({
     exit: { opacity: 0, y: 100 },
   };
   return (
-    <div className={styles.showcase__content}>
+    <motion.div
+      className={styles.showcase__content}
+      variants={sectionVariants}
+      initial="initial"
+      animate={isExpanded ? "exit" : "animate"}
+      exit="exit"
+    >
       <Container>
         <Row alignItems="flex-end" paddingBottom={2}>
           <Col md={1}>
@@ -43,9 +56,9 @@ const ShowcaseContent = ({
               <span className={styles.showcase__number}>{activeIndex + 1}</span>
             </motion.div>
           </Col>
-          <Col xs={9} md={6}>
+          <Col xs={9} md={6} textAlign={"right"}>
             <motion.h2
-              className={styles.showcase__artist}
+              className={styles.showcase__artist__name}
               key={items[activeIndex].name}
               variants={headlineVariants}
               initial="initial"
@@ -102,11 +115,17 @@ const ShowcaseContent = ({
             </Col>
           )}
           <Col md={6} textAlign="right">
-            <ButtonUI label="View artist page" icon="faArrowRight" />
+            <ButtonUI
+              label="View artist page"
+              icon="faArrowRight"
+              clickHandler={() => {
+                setIsExpanded(true);
+              }}
+            />
           </Col>
         </Row>
       </Container>
-    </div>
+    </motion.div>
   );
 };
 export default ShowcaseContent;

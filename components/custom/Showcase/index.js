@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
-
+import classnames from "classnames/bind";
 import ShowcaseContent from "./content";
+import ShowcaseExpandedContent from "./ExpandedContent";
 import ShowcaseImages from "./images";
 
 import styles from "./Showcase.module.scss";
+
+const cx = classnames.bind(styles);
 
 const Showcase = ({ items }) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -28,8 +31,13 @@ const Showcase = ({ items }) => {
 
   console.log({ albums });
 
+  const showcaseClasses = cx({
+    showcase: true,
+    expanded: isExpanded,
+  });
+
   return (
-    <div className={styles.showcase}>
+    <div className={showcaseClasses}>
       <AnimatePresence>
         <ShowcaseImages
           key="top"
@@ -37,13 +45,24 @@ const Showcase = ({ items }) => {
           activeIndex={activeIndex}
           isExpanded={isExpanded}
         />
-        <ShowcaseContent
-          key="bottom"
-          items={items}
-          activeIndex={activeIndex}
-          setActiveIndex={setActiveIndex}
-          latestRelease={albums?.length > 0 ? albums[0] : null}
-        />
+        {!isExpanded ? (
+          <ShowcaseContent
+            key="bottom"
+            items={items}
+            activeIndex={activeIndex}
+            setActiveIndex={setActiveIndex}
+            latestRelease={albums?.length > 0 ? albums[0] : null}
+            isExpanded={isExpanded}
+            setIsExpanded={setIsExpanded}
+          />
+        ) : (
+          <ShowcaseExpandedContent
+            items={items}
+            activeIndex={activeIndex}
+            albums={albums}
+            setIsExpanded={setIsExpanded}
+          />
+        )}
       </AnimatePresence>
     </div>
   );
