@@ -1,3 +1,6 @@
+import { motion } from "framer-motion";
+import { useState } from "react";
+
 import ButtonUI from "@/components/html/ButtonUI";
 import Container from "@/components/layout/Container";
 import Grid from "../../layout/Grid";
@@ -11,6 +14,27 @@ const ShowcaseExpandedContent = ({
   items,
   setIsExpanded,
 }) => {
+  const [isGridVisible, setIsGridVisible] = useState(false);
+  const topVariants = {
+    initial: {
+      y: 50,
+      opacity: 0,
+    },
+    animate: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        delay: 0.75,
+        duration: 0.25,
+        ease: "linear",
+      },
+    },
+    exit: {
+      y: 50,
+      opacity: 0,
+    },
+  };
+
   return (
     <section className={styles.showcase__expanded__content}>
       <ButtonUI
@@ -19,7 +43,13 @@ const ShowcaseExpandedContent = ({
           setIsExpanded(false);
         }}
       />
-      <div className={styles.showcase__expanded__content__top}>
+      <motion.div
+        className={styles.showcase__expanded__content__top}
+        variants={topVariants}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+      >
         <h2 className={styles.showcase__artist__name}>
           {items[activeIndex].name}
         </h2>
@@ -29,9 +59,11 @@ const ShowcaseExpandedContent = ({
           clickHandler={() => {
             const slideTarget = document.getElementById("bottomContent");
             slideTarget.scrollIntoView({ behavior: "smooth" });
+
+            setIsGridVisible(true);
           }}
         />
-      </div>
+      </motion.div>
       <div
         className={styles.showcase__expanded__content__bottom}
         id="bottomContent"
@@ -40,7 +72,7 @@ const ShowcaseExpandedContent = ({
           <Heading level={2} marginBottom={2} marginTop={4}>
             Albums
           </Heading>
-          <Grid items={albums} />
+          {isGridVisible && <Grid items={albums} />}
         </Container>
       </div>
     </section>
