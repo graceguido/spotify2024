@@ -28,11 +28,12 @@ export async function GET(request) {
     );
 
     if (!apiResponse.ok) {
-      // Return a 500 response if the API request fails
+      const errorText = await apiResponse.text(); // Retrieve full error response
+      console.error(`Spotify API Error: ${apiResponse.status}, ${errorText}`);
       return new Response(
-        JSON.stringify({ error: "Spotify API request failed" }),
+        JSON.stringify({ error: `Spotify API request failed: ${errorText}` }),
         {
-          status: 500,
+          status: apiResponse.status,
           headers: { "Content-Type": "application/json" },
         }
       );
