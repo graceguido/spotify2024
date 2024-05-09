@@ -4,10 +4,11 @@ import classnames from "classnames/bind";
 
 const cx = classnames.bind(styles);
 
-const ButtonUI = ({ clickHandler, icon, label }) => {
+const ButtonUI = ({ clickHandler, disabled, icon, label }) => {
   const ButtonUIClasses = cx({
     btnui: true,
     close: icon === "faXmark",
+    disabled: disabled,
   });
   return (
     <button className={ButtonUIClasses} onClick={clickHandler}>

@@ -15,11 +15,11 @@ const ShowcaseImages = ({ activeIndex, isExpanded, items }) => {
       <ul
         className={styles.showcase__images__list}
         style={{
-          width: `${items.length * 100}%`,
-          transform: `translateX(-${(activeIndex / items.length) * 100}%)`,
+          width: `${items?.length * 100}%`,
+          transform: `translateX(-${(activeIndex / items?.length) * 100}%)`,
         }}
       >
-        {items.map((item, index) => {
+        {items?.map((item, index) => {
           return (
             <li className={styles.showcase__images__list__item} key={index}>
               <Image

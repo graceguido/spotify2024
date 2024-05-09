@@ -27,11 +27,7 @@ const HomePage = () => {
 
   //console.log({ artists });
 
-  return (
-    <main>
-      <Showcase items={artists} />
-    </main>
-  );
+  return <main>{artists.length > 0 && <Showcase items={artists} />}</main>;
 };
 
 export default HomePage;

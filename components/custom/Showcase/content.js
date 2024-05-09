@@ -30,6 +30,7 @@ const ShowcaseContent = ({
     animate: { opacity: 1, y: 0 },
     exit: { opacity: 0, y: 100 },
   };
+
   return (
     <motion.div
       className={styles.showcase__content}
@@ -42,7 +43,7 @@ const ShowcaseContent = ({
         <Row alignItems="flex-end" paddingBottom={2}>
           <Col md={1}>
             <span className={styles.showcase__counter}>
-              {activeIndex + 1}/{items.length}
+              {activeIndex + 1}/{items?.length}
             </span>
           </Col>
           <Col xs={3} md={5}>
@@ -74,15 +75,17 @@ const ShowcaseContent = ({
             <Row justifyContent="space-between">
               <ButtonUI
                 icon="faAngleLeft"
+                disabled={activeIndex === 0}
                 clickHandler={() => {
                   setActiveIndex(activeIndex <= 0 ? 0 : activeIndex - 1);
                 }}
               />
               <ButtonUI
                 icon="faAngleRight"
+                disabled={activeIndex === items.length - 1}
                 clickHandler={() => {
                   setActiveIndex(
-                    activeIndex >= items.length - 1
+                    activeIndex >= items?.length - 1
                       ? items.length - 1
                       : activeIndex + 1
                   );
