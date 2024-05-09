@@ -81,7 +81,7 @@ const ShowcaseContent = ({
             <Col md={5}>
               <div className={styles.showcase__latest}>
                 <Row>
-                  <Col>
+                  <Col xs={4} sm={4}>
                     <Image
                       src={latestRelease.images[0].url}
                       alt={latestRelease.name}
@@ -90,10 +90,12 @@ const ShowcaseContent = ({
                       className={styles.album__cover}
                     />
                   </Col>
-                  <Col>
+                  <Col xs={8} sm={8}>
                     <Heading level={3}>Latest Release</Heading>
-                    <p>{latestRelease.name}</p>
-                    <p>{latestRelease.release_date}</p>
+                    <Heading level={4}>{latestRelease.name}</Heading>
+                    <Heading level={5}>
+                      {latestRelease.release_date.split("-")[0]}
+                    </Heading>
                   </Col>
                 </Row>
               </div>

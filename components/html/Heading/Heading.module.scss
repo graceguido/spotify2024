@@ -19,5 +19,15 @@
     color: vars.$color__brand;
     font-weight: bold;
   }
+  &--4 {
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: vars.$font__regular;
+  }
+  &--5 {
+    font-size: 1rem;
+    font-family: vars.$font__regular;
+    opacity: 0.75;
+  }
   @include mixins.generateMargins();
 }

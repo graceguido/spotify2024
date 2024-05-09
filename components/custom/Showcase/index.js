@@ -9,6 +9,7 @@ import styles from "./Showcase.module.scss";
 const Showcase = ({ items }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [albums, setAlbums] = useState([]);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
     //console.log("use effect for showcase");
@@ -30,7 +31,12 @@ const Showcase = ({ items }) => {
   return (
     <div className={styles.showcase}>
       <AnimatePresence>
-        <ShowcaseImages key="top" items={items} activeIndex={activeIndex} />
+        <ShowcaseImages
+          key="top"
+          items={items}
+          activeIndex={activeIndex}
+          isExpanded={isExpanded}
+        />
         <ShowcaseContent
           key="bottom"
           items={items}

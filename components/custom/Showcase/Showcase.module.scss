@@ -27,6 +27,9 @@
         }
       }
     }
+    &.expanded {
+      height: 100vh;
+    }
     @include mixins.breakpoint(laptop) {
       width: 60vw;
       position: absolute;
@@ -77,5 +80,11 @@
     background-color: black;
     padding: 1rem;
     border: 1px solid white;
+  }
+}
+.album {
+  &__cover {
+    width: 100%;
+    height: auto;
   }
 }
