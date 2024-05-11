@@ -20,10 +20,6 @@ export async function GET() {
       name: "Kendrick Lamar",
       spotify_id: "2YZyLoL8N0Wb9xBt1NhZWg",
     },
-    {
-      name: "The Strokes",
-      spotify_id: "0epOFNiUfyON9EYx7Tpr6V",
-    },
   ];
 
   const artistsIds = artists.map((artist) => artist.spotify_id);
